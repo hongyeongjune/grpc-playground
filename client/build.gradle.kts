@@ -18,18 +18,30 @@ repositories {
 }
 
 dependencies {
+    // https://github.com/grpc/grpc-kotlin/blob/master/examples/stub/build.gradle.kts
+    protobuf(project(":proto"))
+
+    // logging
+    implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
+
+    // kotlin
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+
     // spring
     implementation("org.springframework.boot:spring-boot-starter-web")
 
-    // https://github.com/grpc/grpc-kotlin/blob/master/examples/stub/build.gradle.kts
-    protobuf(project(":proto"))
+    // webflux
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
 
     // grpc
     implementation("io.grpc:grpc-stub:$grpcProtoVersion")
     implementation("io.grpc:grpc-protobuf:$grpcProtoVersion")
     implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion") // kotlin stub 제공
     implementation("com.google.protobuf:protobuf-kotlin:$grpcVersion") // kotlin 코드 생성 도구
-//    implementation("io.grpc:grpc-netty:$grpcProtoVersion") // stub NettyChannel 에 사용
+    implementation("io.grpc:grpc-netty:$grpcProtoVersion") // stub NettyChannel 에 사용
 }
 
 protobuf {

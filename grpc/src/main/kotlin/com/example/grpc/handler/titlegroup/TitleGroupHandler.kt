@@ -3,7 +3,8 @@ package com.example.grpc.handler.titlegroup
 import com.example.grpc.annotation.GrpcHandler
 import com.example.grpc.service.titlegroup.TitleGroupFindService
 import com.example.grpc.service.titlegroup.TitleGroupSaveService
-import com.example.grpc.service.titlegroup.dto.CreateTitleGroupDto
+import com.example.grpc.service.titlegroup.dto.TitleGroupDto
+import com.example.proto.title.CreateTitleRequest
 import com.example.proto.titlegroup.CreateTitleGroupRequest
 import com.example.proto.titlegroup.TitleGroupHandlerGrpcKt
 import com.example.proto.titlegroup.TitleGroupIdRequest
@@ -27,7 +28,7 @@ class TitleGroupHandler(
     }
 
     override suspend fun createTitleGroup(request: CreateTitleGroupRequest): TitleGroupResponse {
-        return titleGroupSaveService.createTitleGroup(CreateTitleGroupDto.of(request))
+        return titleGroupSaveService.createTitleGroup(TitleGroupDto.CreateTitleGroupRequest.of(request))
             .let { TitleGroupMapper.fromTitleGroupResponse(it) }
     }
 }

@@ -1,6 +1,6 @@
 package com.example.grpc.entity.member
 
-import com.example.grpc.service.member.dto.CreateMemberDto
+import com.example.grpc.service.member.dto.MemberDto
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.LastModifiedDate
@@ -20,8 +20,8 @@ class MemberEntity(
     val modifiedDate: LocalDateTime = LocalDateTime.now(),
 ) {
     companion object {
-        fun of(createMemberDto: CreateMemberDto): MemberEntity {
-            return with(createMemberDto) {
+        fun of(request: MemberDto.CreateMemberRequest): MemberEntity {
+            return with(request) {
                 MemberEntity(
                     name = name,
                     createdBy = createdBy,

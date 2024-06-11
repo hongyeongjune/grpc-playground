@@ -10,22 +10,22 @@ import com.google.protobuf.Int32Value
 import com.google.protobuf.StringValue
 
 object TitleMapper {
-    fun fromTitleResponse(titleDto: TitleDto): TitleResponse {
+    fun fromTitleResponse(response: TitleDto.TitleResponse): TitleResponse {
         return titleResponse {
-            id = titleDto.id
-            titleGroupId = titleDto.titleGroupId
-            subject = titleDto.subject
-            titleDto.description?.let { description = StringValue.of(it) }
-            createdBy = titleDto.createdBy
-            titleDto.modifiedBy?.let { modifiedBy = Int32Value.of(it) }
-            createdDate = titleDto.createdDate.toTimestamp()
-            modifiedDate = titleDto.modifiedDate.toTimestamp()
+            id = response.id
+            titleGroupId = response.titleGroupId
+            subject = response.subject
+            response.description?.let { description = StringValue.of(it) }
+            createdBy = response.createdBy
+            response.modifiedBy?.let { modifiedBy = Int32Value.of(it) }
+            createdDate = response.createdDate.toTimestamp()
+            modifiedDate = response.modifiedDate.toTimestamp()
         }
     }
 
-    fun fromTitleListResponse(titleDtoList: List<TitleDto>): TitleListResponse {
+    fun fromTitleListResponse(responseList: List<TitleDto.TitleResponse>): TitleListResponse {
         return titleListResponse {
-            title.addAll(titleDtoList.map { fromTitleResponse(it) })
+            title.addAll(responseList.map { fromTitleResponse(it) })
         }
     }
 }

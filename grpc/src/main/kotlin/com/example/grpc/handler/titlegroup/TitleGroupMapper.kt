@@ -9,20 +9,20 @@ import com.example.proto.titlegroup.titleGroupResponse
 import com.google.protobuf.Int32Value
 
 object TitleGroupMapper {
-    fun fromTitleGroupResponse(titleGroupDto: TitleGroupDto): TitleGroupResponse {
+    fun fromTitleGroupResponse(response: TitleGroupDto.TitleGroupResponse): TitleGroupResponse {
         return titleGroupResponse {
-            id = titleGroupDto.id
-            subject = titleGroupDto.subject
-            createdBy = titleGroupDto.createdBy
-            titleGroupDto.modifiedBy?.let { modifiedBy = Int32Value.of(it) }
-            createdDate = titleGroupDto.createdDate.toTimestamp()
-            modifiedDate = titleGroupDto.modifiedDate.toTimestamp()
+            id = response.id
+            subject = response.subject
+            createdBy = response.createdBy
+            response.modifiedBy?.let { modifiedBy = Int32Value.of(it) }
+            createdDate = response.createdDate.toTimestamp()
+            modifiedDate = response.modifiedDate.toTimestamp()
         }
     }
 
-    fun fromTitleGroupListResponse(titleGroupDtoList: List<TitleGroupDto>): TitleGroupListResponse {
+    fun fromTitleGroupListResponse(responseList: List<TitleGroupDto.TitleGroupResponse>): TitleGroupListResponse {
         return titleGroupListResponse {
-            titleGroup.addAll(titleGroupDtoList.map { fromTitleGroupResponse(it) })
+            titleGroup.addAll(responseList.map { fromTitleGroupResponse(it) })
         }
     }
 }

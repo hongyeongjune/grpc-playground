@@ -3,7 +3,7 @@ package com.example.grpc.handler.member
 import com.example.grpc.annotation.GrpcHandler
 import com.example.grpc.service.member.MemberFindService
 import com.example.grpc.service.member.MemberSaveService
-import com.example.grpc.service.member.dto.CreateMemberDto
+import com.example.grpc.service.member.dto.MemberDto
 import com.example.proto.member.CreateMemberRequest
 import com.example.proto.member.MemberHandlerGrpcKt
 import com.example.proto.member.MemberIdRequest
@@ -20,7 +20,7 @@ class MemberHandler(
     }
 
     override suspend fun createMember(request: CreateMemberRequest): MemberResponse {
-        return memberSaveService.createMember(CreateMemberDto.of(request))
+        return memberSaveService.createMember(MemberDto.CreateMemberRequest.of(request))
             .let { MemberMapper.fromMemberResponse(it) }
     }
 }

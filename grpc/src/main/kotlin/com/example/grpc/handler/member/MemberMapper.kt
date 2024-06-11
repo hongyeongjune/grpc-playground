@@ -7,14 +7,14 @@ import com.example.proto.member.memberResponse
 import com.google.protobuf.Int32Value
 
 object MemberMapper {
-    fun fromMemberResponse(memberDto: MemberDto): MemberResponse {
+    fun fromMemberResponse(response: MemberDto.MemberResponse): MemberResponse {
         return memberResponse {
-            id = memberDto.id
-            name = memberDto.name
-            createdBy = memberDto.createdBy
-            memberDto.modifiedBy?.let { modifiedBy = Int32Value.of(it) }
-            createdDate = memberDto.createdDate.toTimestamp()
-            modifiedDate = memberDto.modifiedDate.toTimestamp()
+            id = response.id
+            name = response.name
+            createdBy = response.createdBy
+            response.modifiedBy?.let { modifiedBy = Int32Value.of(it) }
+            createdDate = response.createdDate.toTimestamp()
+            modifiedDate = response.modifiedDate.toTimestamp()
         }
     }
 }

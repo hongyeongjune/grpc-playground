@@ -1,6 +1,6 @@
 package com.example.grpc.entity.titlegroup
 
-import com.example.grpc.service.titlegroup.dto.CreateTitleGroupDto
+import com.example.grpc.service.titlegroup.dto.TitleGroupDto
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.LastModifiedDate
@@ -20,8 +20,8 @@ class TitleGroupEntity(
     val modifiedDate: LocalDateTime = LocalDateTime.now(),
 ) {
     companion object {
-        fun of(createTitleGroupDto: CreateTitleGroupDto): TitleGroupEntity {
-            return with(createTitleGroupDto) {
+        fun of(request: TitleGroupDto.CreateTitleGroupRequest): TitleGroupEntity {
+            return with(request) {
                 TitleGroupEntity(
                     subject = subject,
                     createdBy = createdBy,

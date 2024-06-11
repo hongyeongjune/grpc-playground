@@ -11,8 +11,8 @@ class MemberFindService(
     private val memberRepository: MemberRepository,
 ) {
     @Transactional(readOnly = true)
-    suspend fun getMember(id: Int): MemberDto {
+    suspend fun getMember(id: Int): MemberDto.MemberResponse {
         val memberEntity = memberRepository.findById(id) ?: throw ResourceNotFoundException.of("member")
-        return MemberDto.of(memberEntity)
+        return MemberDto.MemberResponse.of(memberEntity)
     }
 }

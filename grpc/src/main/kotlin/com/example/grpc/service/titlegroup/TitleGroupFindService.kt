@@ -12,14 +12,14 @@ class TitleGroupFindService(
     private val titleGroupRepository: TitleGroupRepository,
 ) {
     @Transactional(readOnly = true)
-    suspend fun getTitleGroup(id: Int): TitleGroupDto {
+    suspend fun getTitleGroup(id: Int): TitleGroupDto.TitleGroupResponse {
         val titleGroupEntity = titleGroupRepository.findById(id) ?: throw ResourceNotFoundException("titlegroup")
-        return TitleGroupDto.of(titleGroupEntity)
+        return TitleGroupDto.TitleGroupResponse.of(titleGroupEntity)
     }
 
     @Transactional(readOnly = true)
-    suspend fun getTitleGroups(): List<TitleGroupDto> {
+    suspend fun getTitleGroups(): List<TitleGroupDto.TitleGroupResponse> {
         val titleGroupEntityList = titleGroupRepository.findAll().toList()
-        return titleGroupEntityList.map { TitleGroupDto.of(it) }
+        return titleGroupEntityList.map { TitleGroupDto.TitleGroupResponse.of(it) }
     }
 }
